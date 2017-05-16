@@ -20,7 +20,12 @@
 package com.puppycrawl.tools.checkstyle.api;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.SortedSet;
 
@@ -44,6 +49,12 @@ public abstract class AbstractFileSetCheck
 
     /** The file extensions that are accepted by this filter. */
     private String[] fileExtensions = CommonUtils.EMPTY_STRING_ARRAY;
+
+
+
+    protected final Stats stats = new Stats();
+
+    protected FileStats fileStats;
 
     /**
      * Called to process a file that matches the specified file extensions.
@@ -75,14 +86,59 @@ public abstract class AbstractFileSetCheck
         messageCollector.reset();
         // Process only what interested in
         if (CommonUtils.matchesFileExtension(file, fileExtensions)) {
+            final String fileName = file.getPath();
+            fileStats = new FileStats().setFileName(fileName)
+                .setFileSize(file.length());
+
+            final long beforeTotal = System.nanoTime();
+
             processFiltered(file, lines);
+
+            final long afterTotal = System.nanoTime();
+            fileStats.setTotalTime(afterTotal - beforeTotal);
+            stats.addFileStats(fileStats);
         }
         return messageCollector.getMessages();
     }
 
     @Override
     public void finishProcessing() {
-        // No code by default, should be overridden only by demand at subclasses
+        try {
+            writeStatsToFile();
+        }
+        catch (FileNotFoundException | UnsupportedEncodingException ex) {
+            throw new IllegalStateException("Unable to write stats", ex);
+        }
+    }
+
+    public void writeStatsToFile() throws FileNotFoundException, UnsupportedEncodingException {
+        try (PrintWriter writer = new PrintWriter(
+            "stats-" + getClass().getSimpleName() + ".csv", "UTF-8")) {
+            writeRowToFile(writer, "File",
+                "ast", "walk", "append comments", "walk comments", "total", "file size (KB)");
+            for (FileStats fileStats : stats.getFileStats()) {
+                writeRowToFile(writer,
+                    fileStats.getFileName(),
+                    fileStats.getParseAstTime(),
+                    fileStats.getWalkOrdinaryTime(),
+                    fileStats.getAppendHiddenCommentNotesTime(),
+                    fileStats.getWalkWithCommentsTime(),
+                    fileStats.getTotalTime(),
+                    fileStats.getFileSize());
+            }
+            writeRowToFile(writer);
+        }
+    }
+
+    public void writeRowToFile(PrintWriter writer, Object... values) {
+        final StringBuilder builder = new StringBuilder();
+        String separator = "";
+        for (Object value : values) {
+            builder.append(separator).append(value);
+            separator = ",";
+        }
+        builder.append('\n');
+        writer.write(builder.toString());
     }
 
     @Override
@@ -174,5 +230,90 @@ public abstract class AbstractFileSetCheck
                 .getMessages();
         messageCollector.reset();
         getMessageDispatcher().fireErrors(fileName, errors);
+    }
+
+    public static class Stats {
+        private final List<FileStats> fileStats = new ArrayList<>();
+
+        public void addFileStats(FileStats fileStat) {
+            fileStats.add(fileStat);
+        }
+
+        public List<FileStats> getFileStats() {
+            return Collections.unmodifiableList(fileStats);
+        }
+    }
+
+    public static class FileStats {
+        private String fileName;
+        private long parseAstTime;
+        private long walkOrdinaryTime;
+        private long appendHiddenCommentNotesTime;
+        private long walkWithCommentsTime;
+        private long totalTime;
+        private long fileSize;
+
+        public String getFileName() {
+            return fileName;
+        }
+
+        public FileStats setFileName(String fileName) {
+            this.fileName = fileName;
+            return this;
+        }
+
+        public long getParseAstTime() {
+            return parseAstTime;
+        }
+
+        public FileStats setParseAstTime(long parseAstTime) {
+            this.parseAstTime = parseAstTime;
+            return this;
+        }
+
+        public long getWalkOrdinaryTime() {
+            return walkOrdinaryTime;
+        }
+
+        public FileStats setWalkOrdinaryTime(long walkOrdinaryTime) {
+            this.walkOrdinaryTime = walkOrdinaryTime;
+            return this;
+        }
+
+        public long getAppendHiddenCommentNotesTime() {
+            return appendHiddenCommentNotesTime;
+        }
+
+        public FileStats setAppendHiddenCommentNotesTime(long appendHiddenCommentNotesTime) {
+            this.appendHiddenCommentNotesTime = appendHiddenCommentNotesTime;
+            return this;
+        }
+
+        public long getWalkWithCommentsTime() {
+            return walkWithCommentsTime;
+        }
+
+        public FileStats setWalkWithCommentsTime(long walkWithCommentsTime) {
+            this.walkWithCommentsTime = walkWithCommentsTime;
+            return this;
+        }
+
+        public long getTotalTime() {
+            return totalTime;
+        }
+
+        public FileStats setTotalTime(long totalTime) {
+            this.totalTime = totalTime;
+            return this;
+        }
+
+        public long getFileSize() {
+            return fileSize;
+        }
+
+        public FileStats setFileSize(long fileSize) {
+            this.fileSize = fileSize;
+            return this;
+        }
     }
 }

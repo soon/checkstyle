@@ -173,15 +173,29 @@ public final class TreeWalker extends AbstractFileSetCheck implements ExternalRe
             try {
                 final FileText text = FileText.fromLines(file, lines);
                 final FileContents contents = new FileContents(text);
+
+                final long beforeParseAst = System.nanoTime();
                 final DetailAST rootAST = parse(contents);
+                final long afterParseAst = System.nanoTime();
+                fileStats.setParseAstTime(afterParseAst - beforeParseAst);
 
                 getMessageCollector().reset();
 
+                final long beforeWalkOrdinary = System.nanoTime();
                 walk(rootAST, contents, AstState.ORDINARY);
+                final long afterWalkOrdinary = System.nanoTime();
+                fileStats.setWalkOrdinaryTime(afterWalkOrdinary - beforeWalkOrdinary);
 
+                final long beforeAppendHiddenCommentNodes = System.nanoTime();
                 final DetailAST astWithComments = appendHiddenCommentNodes(rootAST);
+                final long afterAppendHiddenCommentNotes = System.nanoTime();
+                fileStats.setAppendHiddenCommentNotesTime(
+                    afterAppendHiddenCommentNotes - beforeAppendHiddenCommentNodes);
 
+                final long beforeWalkWithComments = System.nanoTime();
                 walk(astWithComments, contents, AstState.WITH_COMMENTS);
+                final long afterWalkWithComments = System.nanoTime();
+                fileStats.setWalkWithCommentsTime(afterWalkWithComments - beforeWalkWithComments);
             }
             catch (final TokenStreamRecognitionException tre) {
                 final String exceptionMsg = String.format(Locale.ROOT, msg,
