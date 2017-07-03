@@ -75,13 +75,13 @@ public class IllegalInstantiationCheck
     private static final String JAVA_LANG = "java.lang.";
 
     /** The imports for the file. */
-    private final Set<FullIdent> imports = new HashSet<>();
+    private Set<FullIdent> imports = new HashSet<>();
 
     /** The class names defined in the file. */
-    private final Set<String> classNames = new HashSet<>();
+    private Set<String> classNames = new HashSet<>();
 
     /** The instantiations in the file. */
-    private final Set<DetailAST> instantiations = new HashSet<>();
+    private Set<DetailAST> instantiations = new HashSet<>();
 
     /** Set of fully qualified class names. E.g. "java.lang.Boolean" */
     private Set<String> illegalClasses = new HashSet<>();

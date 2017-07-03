@@ -88,7 +88,7 @@ public abstract class AbstractJavadocCheck extends AbstractCheck
     /**
      * Parses content of Javadoc comment as DetailNode tree.
      */
-    private final JavadocDetailNodeParser parser = new JavadocDetailNodeParser();
+    private JavadocDetailNodeParser parser = new JavadocDetailNodeParser();
 
     /** The javadoc tokens the check is interested in. */
     private final Set<Integer> javadocTokens = new HashSet<>();
@@ -283,6 +283,8 @@ public abstract class AbstractJavadocCheck extends AbstractCheck
                 log(parseErrorMessage.getLineNumber(),
                         parseErrorMessage.getMessageKey(),
                         parseErrorMessage.getMessageArguments());
+                System.err.println("Parse error message: " + parseErrorMessage);
+                System.err.println("Class: " + getClass());
             }
         }
 
@@ -347,5 +349,4 @@ public abstract class AbstractJavadocCheck extends AbstractCheck
     private boolean shouldBeProcessed(DetailNode curNode) {
         return javadocTokens.contains(curNode.getType());
     }
-
 }

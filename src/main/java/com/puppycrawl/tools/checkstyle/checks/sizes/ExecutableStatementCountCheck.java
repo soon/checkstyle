@@ -45,7 +45,7 @@ public final class ExecutableStatementCountCheck
     private static final int DEFAULT_MAX = 30;
 
     /** Stack of method contexts. */
-    private final Deque<Context> contextStack = new ArrayDeque<>();
+    private Deque<Context> contextStack = new ArrayDeque<>();
 
     /** Threshold to report error for. */
     private int max;

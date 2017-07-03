@@ -61,7 +61,7 @@ public final class ReturnCountCheck extends AbstractCheck implements OneCheckIns
     public static final String MSG_KEY = "return.count";
 
     /** Stack of method contexts. */
-    private final Deque<Context> contextStack = new ArrayDeque<>();
+    private Deque<Context> contextStack = new ArrayDeque<>();
 
     /** The regexp to match against. */
     private Pattern format = Pattern.compile("^equals$");

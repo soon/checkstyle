@@ -52,7 +52,7 @@ public class MultipleStringLiteralsCheck extends AbstractCheck
      * {@code <String, ArrayList>}, with the ArrayList containing StringInfo
      * objects.
      */
-    private final Map<String, List<StringInfo>> stringMap = new HashMap<>();
+    private Map<String, List<StringInfo>> stringMap = new HashMap<>();
 
     /**
      * Marks the TokenTypes where duplicate strings should be ignored.

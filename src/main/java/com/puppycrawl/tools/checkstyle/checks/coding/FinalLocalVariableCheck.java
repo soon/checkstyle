@@ -116,14 +116,14 @@ public class FinalLocalVariableCheck
     };
 
     /** Scope Deque. */
-    private final Deque<ScopeData> scopeStack = new ArrayDeque<>();
+    private Deque<ScopeData> scopeStack = new ArrayDeque<>();
 
     /** Uninitialized variables of previous scope. */
-    private final Deque<Deque<DetailAST>> prevScopeUninitializedVariables =
+    private Deque<Deque<DetailAST>> prevScopeUninitializedVariables =
             new ArrayDeque<>();
 
     /** Assigned variables of current scope. */
-    private final Deque<Deque<DetailAST>> currentScopeAssignedVariables =
+    private Deque<Deque<DetailAST>> currentScopeAssignedVariables =
             new ArrayDeque<>();
 
     /** Controls whether to check enhanced for-loop variable. */

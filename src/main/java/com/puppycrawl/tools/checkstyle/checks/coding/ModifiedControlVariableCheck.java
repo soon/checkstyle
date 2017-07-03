@@ -121,7 +121,7 @@ public final class ModifiedControlVariableCheck extends AbstractCheck
         }).collect(Collectors.toSet());
 
     /** Stack of block parameters. */
-    private final Deque<Deque<String>> variableStack = new ArrayDeque<>();
+    private Deque<Deque<String>> variableStack = new ArrayDeque<>();
 
     /** Controls whether to skip enhanced for-loop variable. */
     private boolean skipEnhancedForLoopVariable;
@@ -253,6 +253,8 @@ public final class ModifiedControlVariableCheck extends AbstractCheck
                 throw new IllegalStateException(ILLEGAL_TYPE_OF_TOKEN + ast);
         }
     }
+
+
 
     /**
      * Enters an inner class, which requires a new variable set.

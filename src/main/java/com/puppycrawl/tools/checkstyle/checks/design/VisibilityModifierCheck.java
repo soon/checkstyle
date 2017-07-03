@@ -313,11 +313,11 @@ public class VisibilityModifierCheck
     private Pattern publicMemberPattern = Pattern.compile("^serialVersionUID$");
 
     /** List of ignore annotations short names. */
-    private final List<String> ignoreAnnotationShortNames =
+    private List<String> ignoreAnnotationShortNames =
             getClassShortNames(DEFAULT_IGNORE_ANNOTATIONS);
 
     /** List of immutable classes short names. */
-    private final List<String> immutableClassShortNames =
+    private List<String> immutableClassShortNames =
         getClassShortNames(DEFAULT_IMMUTABLE_TYPES);
 
     /** List of ignore annotations canonical names. */

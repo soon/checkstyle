@@ -106,7 +106,7 @@ public class FileSetCheckLifecycleTest
 
         @Override
         public void finishProcessing() {
-            fileContentAvailable = contents != null;
+//            fileContentAvailable = contents != null;
         }
     }
 }

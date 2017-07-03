@@ -360,7 +360,7 @@ public class CustomImportOrderCheck extends AbstractCheck implements OneCheckIns
     private final List<String> customImportOrderRules = new ArrayList<>();
 
     /** Contains objects with import attributes. */
-    private final List<ImportDetails> importToGroupList = new ArrayList<>();
+    private List<ImportDetails> importToGroupList = new ArrayList<>();
 
     /** RegExp for SAME_PACKAGE group imports. */
     private String samePackageDomainsRegExp = "";

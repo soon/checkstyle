@@ -48,10 +48,10 @@ import com.puppycrawl.tools.checkstyle.api.TokenTypes;
 public abstract class AbstractTypeAwareCheck extends AbstractCheck
         implements OneCheckInstancePerThread {
     /** Stack of maps for type params. */
-    private final Deque<Map<String, AbstractClassInfo>> typeParams = new ArrayDeque<>();
+    private Deque<Map<String, AbstractClassInfo>> typeParams = new ArrayDeque<>();
 
     /** Imports details. **/
-    private final Set<String> imports = new HashSet<>();
+    private Set<String> imports = new HashSet<>();
 
     /** Full identifier for package of the method. **/
     private FullIdent packageFullIdent;

@@ -53,7 +53,7 @@ public class CovariantEqualsCheck
     public static final String MSG_KEY = "covariant.equals";
 
     /** Set of equals method definitions. */
-    private final Set<DetailAST> equalsMethods = new HashSet<>();
+    private Set<DetailAST> equalsMethods = new HashSet<>();
 
     @Override
     public int[] getDefaultTokens() {

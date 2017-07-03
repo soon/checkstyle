@@ -73,7 +73,7 @@ public final class MethodCountCheck extends AbstractCheck implements OneCheckIns
     private static final int DEFAULT_MAX_METHODS = 100;
 
     /** Maintains stack of counters, to support inner types. */
-    private final Deque<MethodCounter> counters = new ArrayDeque<>();
+    private Deque<MethodCounter> counters = new ArrayDeque<>();
 
     /** Maximum private methods. */
     private int maxPrivate = DEFAULT_MAX_METHODS;

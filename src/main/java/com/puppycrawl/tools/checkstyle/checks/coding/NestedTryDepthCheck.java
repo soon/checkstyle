@@ -81,5 +81,4 @@ public final class NestedTryDepthCheck extends AbstractCheck implements OneCheck
     public void leaveToken(DetailAST literalTry) {
         --depth;
     }
-
 }

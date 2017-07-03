@@ -112,10 +112,10 @@ public class IndentationCheck extends AbstractCheck implements OneCheckInstanceP
     private static final int DEFAULT_INDENTATION = 4;
 
     /** Handlers currently in use. */
-    private final Deque<AbstractExpressionHandler> handlers = new ArrayDeque<>();
+    private Deque<AbstractExpressionHandler> handlers = new ArrayDeque<>();
 
     /** Instance of line wrapping handler to use. */
-    private final LineWrappingHandler lineWrappingHandler = new LineWrappingHandler(this);
+    private LineWrappingHandler lineWrappingHandler = new LineWrappingHandler(this);
 
     /** Factory from which handlers are distributed. */
     private final HandlerFactory handlerFactory = new HandlerFactory();

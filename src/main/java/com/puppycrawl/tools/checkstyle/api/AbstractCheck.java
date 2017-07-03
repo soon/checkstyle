@@ -36,7 +36,7 @@ import com.puppycrawl.tools.checkstyle.utils.CommonUtils;
  * your own checks</a>
  * @noinspection NoopMethodInAbstractClass
  */
-public abstract class AbstractCheck extends AbstractViolationReporter {
+public abstract class AbstractCheck extends AbstractViolationReporter implements Cloneable {
     /** Default tab width for column reporting. */
     private static final int DEFAULT_TAB_WIDTH = 8;
 
@@ -274,5 +274,20 @@ public abstract class AbstractCheck extends AbstractViolationReporter {
                 getId(),
                 getClass(),
                 getCustomMessages().get(key)));
+    }
+
+    @Override
+    public final AbstractCheck clone() throws CloneNotSupportedException {
+        AbstractCheck clone = (AbstractCheck) super.clone();
+        return clone;
+    }
+
+    public AbstractCheck copy() {
+        try {
+            return clone();
+        }
+        catch (CloneNotSupportedException e) {
+            throw new RuntimeException("Unable to perform clone", e);
+        }
     }
 }

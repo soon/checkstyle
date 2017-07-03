@@ -22,7 +22,6 @@ package com.puppycrawl.tools.checkstyle.checks.coding;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
@@ -132,7 +131,7 @@ public final class IllegalTypeCheck extends AbstractCheck
     /** Methods which should be ignored. */
     private final Set<String> ignoredMethodNames = new HashSet<>();
     /** Check methods and fields with only corresponding modifiers. */
-    private List<Integer> memberModifiers;
+    private final Set<Integer> memberModifiers = new HashSet<>();
 
     /** The regexp to match against. */
     private Pattern format = Pattern.compile("^(.*[.])?Abstract.*$");
@@ -446,10 +445,9 @@ public final class IllegalTypeCheck extends AbstractCheck
      * @param modifiers String contains modifiers.
      */
     public void setMemberModifiers(String modifiers) {
-        final List<Integer> modifiersList = new ArrayList<>();
+        memberModifiers.clear();
         for (String modifier : modifiers.split(",")) {
-            modifiersList.add(TokenUtils.getTokenId(modifier.trim()));
+            memberModifiers.add(TokenUtils.getTokenId(modifier.trim()));
         }
-        memberModifiers = modifiersList;
     }
 }

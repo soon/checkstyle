@@ -39,7 +39,7 @@ public class ThreadModeSettings implements Serializable {
 
     /** A multi thread three walker module name. */
     public static final String MULTI_THREAD_TREE_WALKER_MODULE_NAME =
-            TreeWalker.class.getSimpleName();
+            MultiThreadTreeWalker.class.getSimpleName();
 
     /** A single thread mode settings instance. */
     public static final ThreadModeSettings SINGLE_THREAD_MODE_INSTANCE =
@@ -91,8 +91,7 @@ public class ThreadModeSettings implements Serializable {
         }
         else if (TREE_WALKER_MODULE_NAME.equals(name)
                 && getTreeWalkerThreadsNumber() > 1) {
-            throw new IllegalArgumentException(
-                    "Multi thread mode for TreeWalker module is not implemented");
+            resolvedName = MULTI_THREAD_TREE_WALKER_MODULE_NAME;
         }
         else {
             resolvedName = name;

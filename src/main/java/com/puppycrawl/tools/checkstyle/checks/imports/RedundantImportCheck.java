@@ -73,9 +73,9 @@ public class RedundantImportCheck
     public static final String MSG_DUPLICATE = "import.duplicate";
 
     /** Set of the imports. */
-    private final Set<FullIdent> imports = new HashSet<>();
+    private Set<FullIdent> imports = new HashSet<>();
     /** Set of static imports. */
-    private final Set<FullIdent> staticImports = new HashSet<>();
+    private Set<FullIdent> staticImports = new HashSet<>();
 
     /** Name of package in file. */
     private String pkgName;

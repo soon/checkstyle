@@ -56,19 +56,19 @@ public final class NPathComplexityCheck extends AbstractCheck implements OneChec
     /**
      * Stack of NP values for ranges.
      */
-    private final Deque<BigInteger> rangeValues = new ArrayDeque<>();
+    private Deque<BigInteger> rangeValues = new ArrayDeque<>();
 
     /** Stack of NP values for expressions. */
-    private final Deque<Integer> expressionValues = new ArrayDeque<>();
+    private Deque<Integer> expressionValues = new ArrayDeque<>();
 
     /** Stack of belongs to range values for question operator. */
-    private final Deque<Boolean> isAfterValues = new ArrayDeque<>();
+    private Deque<Boolean> isAfterValues = new ArrayDeque<>();
 
     /**
      * Range of the last processed expression. Used for checking that ternary operation
      * which is a part of expression won't be processed for second time.
      */
-    private final TokenEnd processingTokenEnd = new TokenEnd();
+    private TokenEnd processingTokenEnd = new TokenEnd();
 
     /** NP value for current range. */
     private BigInteger currentRangeValue = INITIAL_VALUE;
