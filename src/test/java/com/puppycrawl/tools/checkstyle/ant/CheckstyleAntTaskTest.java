@@ -57,6 +57,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import com.google.common.io.Closeables;
 import com.puppycrawl.tools.checkstyle.BaseCheckTestSupport;
+import com.puppycrawl.tools.checkstyle.DefaultConfiguration;
 import com.puppycrawl.tools.checkstyle.DefaultLogger;
 import com.puppycrawl.tools.checkstyle.Definitions;
 import com.puppycrawl.tools.checkstyle.PackageNamesLoader;
@@ -353,6 +354,50 @@ public class CheckstyleAntTaskTest extends BaseCheckTestSupport {
         assertTrue(errorMessage, output.get(3).endsWith("InputCheckstyleAntTaskError.java:9: "
                 + "Line is longer than 70 characters (found 81). [LineLength]"));
         assertEquals(errorMessage, auditFinishedMessage.getMessage(), output.get(4));
+    }
+
+    @Test
+    public void testDefaultThreadsConfiguration() throws Exception {
+        TestRootModuleChecker.reset();
+
+        final CheckstyleAntTask antTask = getCheckstyleAntTask(CUSTOM_ROOT_CONFIG_FILE);
+        antTask.setFile(new File(getPath(FLAWLESS_INPUT)));
+        antTask.execute();
+
+        final DefaultConfiguration config =
+                (DefaultConfiguration) TestRootModuleChecker.getConfig();
+        assertEquals(1, config.getThreadModeSettings().getCheckerThreadsNumber());
+        assertEquals(1, config.getThreadModeSettings().getTreeWalkerThreadsNumber());
+    }
+
+    @Test
+    public void testSetCheckerThreadsNumber() throws Exception {
+        TestRootModuleChecker.reset();
+
+        final CheckstyleAntTask antTask = getCheckstyleAntTask(CUSTOM_ROOT_CONFIG_FILE);
+        antTask.setFile(new File(getPath(FLAWLESS_INPUT)));
+        antTask.setCheckerThreadsNumber(2);
+        antTask.execute();
+
+        final DefaultConfiguration config =
+                (DefaultConfiguration) TestRootModuleChecker.getConfig();
+        assertEquals(2, config.getThreadModeSettings().getCheckerThreadsNumber());
+        assertEquals(1, config.getThreadModeSettings().getTreeWalkerThreadsNumber());
+    }
+
+    @Test
+    public void testSetTreeWalkerThreadsNumber() throws Exception {
+        TestRootModuleChecker.reset();
+
+        final CheckstyleAntTask antTask = getCheckstyleAntTask(CUSTOM_ROOT_CONFIG_FILE);
+        antTask.setFile(new File(getPath(FLAWLESS_INPUT)));
+        antTask.setTreeWalkerThreadsNumber(4);
+        antTask.execute();
+
+        final DefaultConfiguration config =
+                (DefaultConfiguration) TestRootModuleChecker.getConfig();
+        assertEquals(1, config.getThreadModeSettings().getCheckerThreadsNumber());
+        assertEquals(4, config.getThreadModeSettings().getTreeWalkerThreadsNumber());
     }
 
     @Test

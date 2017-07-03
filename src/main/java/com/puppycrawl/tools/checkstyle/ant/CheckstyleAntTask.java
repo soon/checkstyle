@@ -117,6 +117,12 @@ public class CheckstyleAntTask extends Task {
      */
     private boolean executeIgnoredModules;
 
+    /** The number of threads for the Checker module. */
+    private int checkerThreadsNumber = 1;
+
+    /** The number of threads for the TreeWalker module. */
+    private int treeWalkerThreadsNumber = 1;
+
     ////////////////////////////////////////////////////////////////////////////
     // Setters for ANT specific attributes
     ////////////////////////////////////////////////////////////////////////////
@@ -245,6 +251,22 @@ public class CheckstyleAntTask extends Task {
      */
     public void setExecuteIgnoredModules(boolean omit) {
         executeIgnoredModules = omit;
+    }
+
+    /**
+     * Sets the number of threads for the Checker module.
+     * @param checkerThreadsNumber the number of threads for the Checker module
+     */
+    public void setCheckerThreadsNumber(int checkerThreadsNumber) {
+        this.checkerThreadsNumber = checkerThreadsNumber;
+    }
+
+    /**
+     * Sets the number of threads for the TreeWalker module.
+     * @param treeWalkerThreadsNumber the number of threads for the TreeWalker module
+     */
+    public void setTreeWalkerThreadsNumber(int treeWalkerThreadsNumber) {
+        this.treeWalkerThreadsNumber = treeWalkerThreadsNumber;
     }
 
     ////////////////////////////////////////////////////////////////////////////
@@ -393,7 +415,7 @@ public class CheckstyleAntTask extends Task {
         try {
             final Properties props = createOverridingProperties();
             final ThreadModeSettings threadModeSettings =
-                    ThreadModeSettings.SINGLE_THREAD_MODE_INSTANCE;
+                    new ThreadModeSettings(checkerThreadsNumber, treeWalkerThreadsNumber);
             final Configuration configuration = ConfigurationLoader.loadConfiguration(
                     config, new PropertiesExpander(props),
                     !executeIgnoredModules, threadModeSettings);
