@@ -243,7 +243,7 @@ public class DefaultLogger extends AutomaticBean implements AuditListener {
 
     @Override
     public void fileFinished(AuditEvent event) {
-        infoWriter.flush();
+//        infoWriter.flush();
     }
 
     /**

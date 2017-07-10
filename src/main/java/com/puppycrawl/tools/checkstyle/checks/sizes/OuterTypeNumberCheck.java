@@ -19,6 +19,7 @@
 
 package com.puppycrawl.tools.checkstyle.checks.sizes;
 
+import com.puppycrawl.tools.checkstyle.OneCheckInstancePerThread;
 import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
@@ -27,7 +28,7 @@ import com.puppycrawl.tools.checkstyle.api.TokenTypes;
  * Checks for the number of defined types at the "outer" level.
  * @author oliverb
  */
-public class OuterTypeNumberCheck extends AbstractCheck {
+public class OuterTypeNumberCheck extends AbstractCheck implements OneCheckInstancePerThread {
 
     /**
      * A key is pointing to the warning message text in "messages.properties"

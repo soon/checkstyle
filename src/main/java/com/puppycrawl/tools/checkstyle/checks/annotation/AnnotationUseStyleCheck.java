@@ -23,6 +23,7 @@ import java.util.Locale;
 
 import org.apache.commons.beanutils.ConversionException;
 
+import com.puppycrawl.tools.checkstyle.OneCheckInstancePerApplication;
 import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
@@ -101,7 +102,8 @@ import com.puppycrawl.tools.checkstyle.api.TokenTypes;
  *
  * @author Travis Schneeberger
  */
-public final class AnnotationUseStyleCheck extends AbstractCheck {
+public final class AnnotationUseStyleCheck
+    extends AbstractCheck implements OneCheckInstancePerApplication {
 
     /**
      * Defines the styles for defining elements in an annotation.

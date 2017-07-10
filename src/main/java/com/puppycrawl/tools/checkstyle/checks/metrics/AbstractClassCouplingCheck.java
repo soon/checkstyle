@@ -33,6 +33,7 @@ import java.util.TreeSet;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import com.puppycrawl.tools.checkstyle.OneCheckInstancePerThread;
 import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.FullIdent;
@@ -46,7 +47,8 @@ import com.puppycrawl.tools.checkstyle.utils.CommonUtils;
  * @author <a href="mailto:simon@redhillconsulting.com.au">Simon Harris</a>
  * @author o_sukhodolsky
  */
-public abstract class AbstractClassCouplingCheck extends AbstractCheck {
+public abstract class AbstractClassCouplingCheck extends AbstractCheck
+        implements OneCheckInstancePerThread {
     /** A package separator - "." */
     private static final String DOT = ".";
 

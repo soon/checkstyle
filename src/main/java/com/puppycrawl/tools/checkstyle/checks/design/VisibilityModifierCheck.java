@@ -29,6 +29,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import antlr.collections.AST;
+import com.puppycrawl.tools.checkstyle.OneCheckInstancePerThread;
 import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.FullIdent;
@@ -237,7 +238,7 @@ import com.puppycrawl.tools.checkstyle.utils.ScopeUtils;
  * @author <a href="mailto:nesterenko-aleksey@list.ru">Aleksey Nesterenko</a>
  */
 public class VisibilityModifierCheck
-    extends AbstractCheck {
+    extends AbstractCheck implements OneCheckInstancePerThread {
 
     /**
      * A key is pointing to the warning message text in "messages.properties"

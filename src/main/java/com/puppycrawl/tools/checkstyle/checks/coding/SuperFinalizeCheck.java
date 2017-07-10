@@ -19,6 +19,8 @@
 
 package com.puppycrawl.tools.checkstyle.checks.coding;
 
+import com.puppycrawl.tools.checkstyle.OneCheckInstancePerApplication;
+
 /**
  * <p>
  * Checks that an overriding finalize() method invokes super.finalize().
@@ -37,7 +39,8 @@ package com.puppycrawl.tools.checkstyle.checks.coding;
  * </pre>
  * @author Rick Giles
  */
-public class SuperFinalizeCheck extends AbstractSuperCheck {
+public class SuperFinalizeCheck extends AbstractSuperCheck
+        implements OneCheckInstancePerApplication {
     @Override
     protected String getMethodName() {
         return "finalize";

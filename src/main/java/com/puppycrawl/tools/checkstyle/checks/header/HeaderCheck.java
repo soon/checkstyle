@@ -23,6 +23,7 @@ import java.io.File;
 import java.util.Arrays;
 
 import com.puppycrawl.tools.checkstyle.api.FileText;
+import com.puppycrawl.tools.checkstyle.OneCheckInstancePerApplication;
 
 /**
  * Checks the header of the source against a fixed header file.
@@ -32,7 +33,7 @@ import com.puppycrawl.tools.checkstyle.api.FileText;
  *
  * @author Lars Kühne
  */
-public class HeaderCheck extends AbstractHeaderCheck {
+public class HeaderCheck extends AbstractHeaderCheck implements OneCheckInstancePerApplication {
 
     /**
      * A key is pointing to the warning message text in "messages.properties"

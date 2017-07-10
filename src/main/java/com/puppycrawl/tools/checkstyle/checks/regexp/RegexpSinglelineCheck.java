@@ -103,4 +103,22 @@ public class RegexpSinglelineCheck extends AbstractFileSetCheck {
     public void setIgnoreCase(boolean ignoreCase) {
         this.ignoreCase = ignoreCase;
     }
+
+    @Override
+    public RegexpSinglelineCheck clone() throws CloneNotSupportedException {
+        RegexpSinglelineCheck clone = (RegexpSinglelineCheck) super.clone();
+
+        final DetectorOptions options = DetectorOptions.newBuilder()
+            .reporter(clone)
+            .compileFlags(0)
+            .format(format)
+            .message(message)
+            .minimum(minimum)
+            .maximum(maximum)
+            .ignoreCase(ignoreCase)
+            .build();
+        clone.detector = new SinglelineDetector(options);
+
+        return clone;
+    }
 }

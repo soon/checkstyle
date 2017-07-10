@@ -23,6 +23,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Locale;
 
+import com.puppycrawl.tools.checkstyle.OneCheckInstancePerApplication;
 import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
@@ -67,7 +68,8 @@ import com.puppycrawl.tools.checkstyle.utils.CommonUtils;
  * @author <a href="mailto:nesterenko-aleksey@list.ru">Aleksey Nesterenko</a>
  * @author <a href="mailto:andreyselkin@gmail.com">Andrei Selkin</a>
  */
-public class CommentsIndentationCheck extends AbstractCheck {
+public class CommentsIndentationCheck extends AbstractCheck
+        implements OneCheckInstancePerApplication {
 
     /**
      * A key is pointing to the warning message text in "messages.properties" file.

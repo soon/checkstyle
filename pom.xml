@@ -264,6 +264,11 @@
       <version>1.10.1</version>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>uk.com.robust-it</groupId>
+      <artifactId>cloning</artifactId>
+      <version>1.9.4</version>
+    </dependency>
 
     <!-- test scope stuff -->
     <dependency>
@@ -1492,6 +1497,9 @@
                 <descriptor>config/assembly-bin.xml</descriptor>
                 <descriptor>config/assembly-src.xml</descriptor>
               </descriptors>
+              <descriptorRefs>
+                <ref>jar-with-dependencies</ref>
+              </descriptorRefs>
               <tarLongFileMode>gnu</tarLongFileMode>
             </configuration>
             <executions>

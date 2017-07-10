@@ -25,6 +25,7 @@ import java.util.Deque;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.puppycrawl.tools.checkstyle.OneCheckInstancePerThread;
 import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
@@ -44,7 +45,8 @@ import com.puppycrawl.tools.checkstyle.utils.CheckUtils;
  * </p>
  * @author <a href="mailto:simon@redhillconsulting.com.au">Simon Harris</a>
  */
-public final class ParameterAssignmentCheck extends AbstractCheck {
+public final class ParameterAssignmentCheck extends AbstractCheck
+        implements OneCheckInstancePerThread {
 
     /**
      * A key is pointing to the warning message text in "messages.properties"

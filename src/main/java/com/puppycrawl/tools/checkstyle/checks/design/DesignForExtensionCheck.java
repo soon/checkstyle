@@ -25,6 +25,7 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import com.puppycrawl.tools.checkstyle.OneCheckInstancePerApplication;
 import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.Scope;
@@ -90,7 +91,8 @@ import com.puppycrawl.tools.checkstyle.utils.TokenUtils;
  * @author lkuehne
  * @author Andrei Selkin
  */
-public class DesignForExtensionCheck extends AbstractCheck {
+public class DesignForExtensionCheck extends AbstractCheck
+        implements OneCheckInstancePerApplication {
 
     /**
      * A key is pointing to the warning message text in "messages.properties"

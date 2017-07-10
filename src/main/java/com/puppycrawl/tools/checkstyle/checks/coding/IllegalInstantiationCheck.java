@@ -25,6 +25,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import antlr.collections.AST;
+import com.puppycrawl.tools.checkstyle.OneCheckInstancePerThread;
 import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.FullIdent;
@@ -62,7 +63,7 @@ import com.puppycrawl.tools.checkstyle.utils.CommonUtils;
  * @author lkuehne
  */
 public class IllegalInstantiationCheck
-    extends AbstractCheck {
+    extends AbstractCheck implements OneCheckInstancePerThread {
 
     /**
      * A key is pointing to the warning message text in "messages.properties"

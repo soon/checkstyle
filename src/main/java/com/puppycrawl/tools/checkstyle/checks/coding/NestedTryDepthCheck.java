@@ -19,6 +19,7 @@
 
 package com.puppycrawl.tools.checkstyle.checks.coding;
 
+import com.puppycrawl.tools.checkstyle.OneCheckInstancePerThread;
 import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
@@ -27,7 +28,7 @@ import com.puppycrawl.tools.checkstyle.api.TokenTypes;
  * Restricts nested try-catch-finally blocks to a specified depth (default = 1).
  * @author <a href="mailto:simon@redhillconsulting.com.au">Simon Harris</a>
  */
-public final class NestedTryDepthCheck extends AbstractCheck {
+public final class NestedTryDepthCheck extends AbstractCheck implements OneCheckInstancePerThread {
 
     /**
      * A key is pointing to the warning message text in "messages.properties"

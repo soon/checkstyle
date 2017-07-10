@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import com.puppycrawl.tools.checkstyle.OneCheckInstancePerThread;
 import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
@@ -83,7 +84,7 @@ import com.puppycrawl.tools.checkstyle.utils.CommonUtils;
  *
  * @author maxvetrenko
  */
-public class OneTopLevelClassCheck extends AbstractCheck {
+public class OneTopLevelClassCheck extends AbstractCheck implements OneCheckInstancePerThread {
 
     /**
      * A key is pointing to the warning message text in "messages.properties"

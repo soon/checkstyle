@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.puppycrawl.tools.checkstyle.OneCheckInstancePerApplication;
 import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
@@ -93,7 +94,8 @@ import com.puppycrawl.tools.checkstyle.utils.CommonUtils;
  *
  * @author Roman Ivanov, Daniil Yaroslvtsev, Baratali Izmailov
  */
-public class AbbreviationAsWordInNameCheck extends AbstractCheck {
+public class AbbreviationAsWordInNameCheck extends AbstractCheck
+        implements OneCheckInstancePerApplication {
 
     /**
      * Warning message key.

@@ -27,6 +27,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import antlr.collections.ASTEnumeration;
+import com.puppycrawl.tools.checkstyle.OneCheckInstancePerApplication;
 import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.FullIdent;
@@ -163,7 +164,8 @@ import com.puppycrawl.tools.checkstyle.api.TokenTypes;
  * @author <a href="mailto:rd.ryly@gmail.com">Ruslan Diachenko</a>
  * @author <a href="mailto:barataliba@gmail.com">Baratali Izmailov</a>
  */
-public class VariableDeclarationUsageDistanceCheck extends AbstractCheck {
+public class VariableDeclarationUsageDistanceCheck extends AbstractCheck
+        implements OneCheckInstancePerApplication {
     /**
      * Warning message key.
      */

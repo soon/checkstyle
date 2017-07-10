@@ -23,6 +23,7 @@ import java.math.BigInteger;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
+import com.puppycrawl.tools.checkstyle.OneCheckInstancePerThread;
 import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
@@ -46,7 +47,7 @@ import com.puppycrawl.tools.checkstyle.api.TokenTypes;
  * @author <a href="mailto:andreyselkin@gmail.com">Andrei Selkin</a>
  */
 public class CyclomaticComplexityCheck
-    extends AbstractCheck {
+    extends AbstractCheck implements OneCheckInstancePerThread {
 
     /**
      * A key is pointing to the warning message text in "messages.properties"
@@ -138,6 +139,11 @@ public class CyclomaticComplexityCheck
             TokenTypes.INSTANCE_INIT,
             TokenTypes.STATIC_INIT,
         };
+    }
+
+    @Override
+    public void beginTree(DetailAST rootAST) {
+        valueStack.clear();
     }
 
     @Override

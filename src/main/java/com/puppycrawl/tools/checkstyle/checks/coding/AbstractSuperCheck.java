@@ -23,6 +23,7 @@ import java.util.Deque;
 import java.util.LinkedList;
 
 import antlr.collections.AST;
+import com.puppycrawl.tools.checkstyle.OneCheckInstancePerThread;
 import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
@@ -36,7 +37,7 @@ import com.puppycrawl.tools.checkstyle.utils.ScopeUtils;
  * @author Rick Giles
  */
 public abstract class AbstractSuperCheck
-        extends AbstractCheck {
+        extends AbstractCheck implements OneCheckInstancePerThread {
 
     /**
      * A key is pointing to the warning message text in "messages.properties"

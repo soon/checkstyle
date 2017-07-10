@@ -701,7 +701,7 @@ public final class Main {
         final HelpFormatter formatter = new HelpFormatter();
         formatter.setWidth(HELP_WIDTH);
         formatter.printHelp(String.format("java %s [options] -c <config.xml> file...",
-                Main.class.getName()), buildOptions());
+                Main.class.getName()), buildOptionsExcludeHidden());
     }
 
     /**
@@ -709,6 +709,19 @@ public final class Main {
      * @return available options
      */
     private static Options buildOptions() {
+        final Options options = buildOptionsExcludeHidden();
+        options.addOption(OPTION_CAPITAL_C_NAME, OPTION_CHECKER_THREADS_NUMBER_NAME, true,
+                "The number of Checker threads (must be greater than zero)");
+        options.addOption(OPTION_CAPITAL_W_NAME, OPTION_TREE_WALKER_THREADS_NUMBER_NAME, true,
+                "The number of TreeWalker threads (must be greater than zero)");
+        return options;
+    }
+
+    /**
+     * Builds and returns list of parameters supported by cli Checkstyle, excluding hidden options.
+     * @return available options (excluding hidden options)
+     */
+    private static Options buildOptionsExcludeHidden() {
         final Options options = new Options();
         options.addOption(OPTION_C_NAME, true, "Sets the check configuration file to use.");
         options.addOption(OPTION_O_NAME, true, "Sets the output file. Defaults to stdout");

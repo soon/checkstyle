@@ -19,6 +19,7 @@
 
 package com.puppycrawl.tools.checkstyle.checks.regexp;
 
+import com.puppycrawl.tools.checkstyle.OneCheckInstancePerApplication;
 import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.utils.CommonUtils;
@@ -28,7 +29,8 @@ import com.puppycrawl.tools.checkstyle.utils.CommonUtils;
  * Supports ignoring comments for matches.
  * @author Oliver Burn
  */
-public class RegexpSinglelineJavaCheck extends AbstractCheck {
+public class RegexpSinglelineJavaCheck extends AbstractCheck
+        implements OneCheckInstancePerApplication {
 
     /** The format of the regular expression to match. */
     private String format = "$.";

@@ -23,6 +23,7 @@ import java.math.BigInteger;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
+import com.puppycrawl.tools.checkstyle.OneCheckInstancePerThread;
 import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
@@ -38,7 +39,7 @@ import com.puppycrawl.tools.checkstyle.api.TokenTypes;
  * @author o_sukhodolsky
  */
 // -@cs[AbbreviationAsWordInName] Can't change check name
-public final class NPathComplexityCheck extends AbstractCheck {
+public final class NPathComplexityCheck extends AbstractCheck implements OneCheckInstancePerThread {
 
     /**
      * A key is pointing to the warning message text in "messages.properties"

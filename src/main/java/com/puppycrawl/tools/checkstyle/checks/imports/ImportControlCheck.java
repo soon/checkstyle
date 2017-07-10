@@ -24,6 +24,7 @@ import java.util.Collections;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+import com.puppycrawl.tools.checkstyle.OneCheckInstancePerThread;
 import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
 import com.puppycrawl.tools.checkstyle.api.CheckstyleException;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
@@ -44,7 +45,8 @@ import com.puppycrawl.tools.checkstyle.api.TokenTypes;
  *
  * @author Oliver Burn
  */
-public class ImportControlCheck extends AbstractCheck implements ExternalResourceHolder {
+public class ImportControlCheck extends AbstractCheck
+        implements ExternalResourceHolder, OneCheckInstancePerThread {
 
     /**
      * A key is pointing to the warning message text in "messages.properties"
@@ -108,6 +110,7 @@ public class ImportControlCheck extends AbstractCheck implements ExternalResourc
     public void beginTree(DetailAST rootAST) {
         currentImportControl = null;
         processCurrentFile = path.matcher(getFileContents().getFileName()).find();
+        packageName = null;
     }
 
     @Override

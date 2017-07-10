@@ -19,6 +19,8 @@
 
 package com.puppycrawl.tools.checkstyle.checks.coding;
 
+import com.puppycrawl.tools.checkstyle.OneCheckInstancePerApplication;
+
 /**
  * <p>
  * Checks that an overriding clone() method invokes super.clone().
@@ -37,7 +39,7 @@ package com.puppycrawl.tools.checkstyle.checks.coding;
  * </pre>
  * @author Rick Giles
  */
-public class SuperCloneCheck extends AbstractSuperCheck {
+public class SuperCloneCheck extends AbstractSuperCheck implements OneCheckInstancePerApplication {
     @Override
     protected String getMethodName() {
         return "clone";

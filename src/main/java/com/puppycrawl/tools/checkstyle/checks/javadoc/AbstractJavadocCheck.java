@@ -29,6 +29,7 @@ import java.util.Set;
 import com.puppycrawl.tools.checkstyle.JavadocDetailNodeParser;
 import com.puppycrawl.tools.checkstyle.JavadocDetailNodeParser.ParseErrorMessage;
 import com.puppycrawl.tools.checkstyle.JavadocDetailNodeParser.ParseStatus;
+import com.puppycrawl.tools.checkstyle.OneCheckInstancePerThread;
 import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.DetailNode;
@@ -42,7 +43,8 @@ import com.puppycrawl.tools.checkstyle.utils.JavadocUtils;
  * @author Baratali Izmailov
  * @noinspection NoopMethodInAbstractClass
  */
-public abstract class AbstractJavadocCheck extends AbstractCheck {
+public abstract class AbstractJavadocCheck extends AbstractCheck
+        implements OneCheckInstancePerThread {
     /**
      * Message key of error message. Missed close HTML tag breaks structure
      * of parse tree, so parser stops parsing and generates such error

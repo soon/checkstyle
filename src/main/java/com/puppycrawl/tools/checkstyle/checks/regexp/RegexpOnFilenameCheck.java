@@ -283,7 +283,11 @@ public class RegexpOnFilenameCheck extends AbstractFileSetCheck {
      */
     private static String getFolderPath(File file) throws CheckstyleException {
         try {
-            return file.getParentFile().getCanonicalPath();
+            File parent = file.getParentFile();
+            if (parent == null) {
+                return "";
+            }
+            return parent.getCanonicalPath();
         }
         catch (IOException ex) {
             throw new CheckstyleException("unable to create canonical path names for "

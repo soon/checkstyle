@@ -19,6 +19,7 @@
 
 package com.puppycrawl.tools.checkstyle.checks.design;
 
+import com.puppycrawl.tools.checkstyle.OneCheckInstancePerThread;
 import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
@@ -32,7 +33,7 @@ import com.puppycrawl.tools.checkstyle.utils.ScopeUtils;
  *
  * @author <a href="mailto:ryly@mail.ru">Ruslan Dyachenko</a>
  */
-public class InnerTypeLastCheck extends AbstractCheck {
+public class InnerTypeLastCheck extends AbstractCheck implements OneCheckInstancePerThread {
 
     /**
      * A key is pointing to the warning message text in "messages.properties"
@@ -56,6 +57,11 @@ public class InnerTypeLastCheck extends AbstractCheck {
     @Override
     public int[] getRequiredTokens() {
         return getAcceptableTokens();
+    }
+
+    @Override
+    public void beginTree(DetailAST rootAST) {
+        rootClass = false;
     }
 
     @Override

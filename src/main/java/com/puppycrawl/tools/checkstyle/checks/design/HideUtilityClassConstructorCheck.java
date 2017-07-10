@@ -19,6 +19,7 @@
 
 package com.puppycrawl.tools.checkstyle.checks.design;
 
+import com.puppycrawl.tools.checkstyle.OneCheckInstancePerApplication;
 import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
@@ -33,7 +34,8 @@ import com.puppycrawl.tools.checkstyle.api.TokenTypes;
  *
  * @author lkuehne
  */
-public class HideUtilityClassConstructorCheck extends AbstractCheck {
+public class HideUtilityClassConstructorCheck extends AbstractCheck
+        implements OneCheckInstancePerApplication {
 
     /**
      * A key is pointing to the warning message text in "messages.properties"

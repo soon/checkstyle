@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import com.puppycrawl.tools.checkstyle.OneCheckInstancePerThread;
 import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
@@ -37,7 +38,8 @@ import com.puppycrawl.tools.checkstyle.utils.TokenUtils;
  *
  * @author Daniel Grenner
  */
-public class MultipleStringLiteralsCheck extends AbstractCheck {
+public class MultipleStringLiteralsCheck extends AbstractCheck
+        implements OneCheckInstancePerThread {
 
     /**
      * A key is pointing to the warning message text in "messages.properties"

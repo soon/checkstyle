@@ -27,6 +27,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Optional;
 
+import com.puppycrawl.tools.checkstyle.OneCheckInstancePerThread;
 import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
@@ -74,7 +75,8 @@ import com.puppycrawl.tools.checkstyle.utils.ScopeUtils;
  * @author k_gibbs, r_auckenthaler
  * @author Vladislav Lisetskiy
  */
-public class FinalLocalVariableCheck extends AbstractCheck {
+public class FinalLocalVariableCheck
+    extends AbstractCheck implements OneCheckInstancePerThread {
 
     /**
      * A key is pointing to the warning message text in "messages.properties"
@@ -178,6 +180,13 @@ public class FinalLocalVariableCheck extends AbstractCheck {
             TokenTypes.VARIABLE_DEF,
             TokenTypes.PARAMETER_DEF,
         };
+    }
+
+    @Override
+    public void beginTree(DetailAST rootAST) {
+        scopeStack.clear();
+        prevScopeUninitializedVariables.clear();
+        currentScopeAssignedVariables.clear();
     }
 
     // -@cs[CyclomaticComplexity] The only optimization which can be done here is moving CASE-block

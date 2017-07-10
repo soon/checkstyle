@@ -19,6 +19,7 @@
 
 package com.puppycrawl.tools.checkstyle.checks.coding;
 
+import com.puppycrawl.tools.checkstyle.OneCheckInstancePerThread;
 import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
@@ -41,7 +42,7 @@ import com.puppycrawl.tools.checkstyle.api.TokenTypes;
  * @author Alexander Jesse
  * @see NestedIfDepthCheck
  */
-public final class NestedForDepthCheck extends AbstractCheck {
+public final class NestedForDepthCheck extends AbstractCheck implements OneCheckInstancePerThread {
 
     /**
      * A key is pointing to the warning message text in "messages.properties"

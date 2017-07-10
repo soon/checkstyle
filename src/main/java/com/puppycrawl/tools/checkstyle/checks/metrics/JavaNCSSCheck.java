@@ -22,6 +22,7 @@ package com.puppycrawl.tools.checkstyle.checks.metrics;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
+import com.puppycrawl.tools.checkstyle.OneCheckInstancePerThread;
 import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
@@ -40,7 +41,7 @@ import com.puppycrawl.tools.checkstyle.api.TokenTypes;
  */
 // -@cs[AbbreviationAsWordInName] We can not change it as,
 // check's name is a part of API (used in configurations).
-public class JavaNCSSCheck extends AbstractCheck {
+public class JavaNCSSCheck extends AbstractCheck implements OneCheckInstancePerThread {
 
     /**
      * A key is pointing to the warning message text in "messages.properties"

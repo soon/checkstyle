@@ -25,6 +25,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+import com.puppycrawl.tools.checkstyle.OneCheckInstancePerThread;
 import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.Scope;
@@ -129,7 +130,7 @@ import com.puppycrawl.tools.checkstyle.utils.ScopeUtils;
  * @author Dmitri Priimak
  */
 public class HiddenFieldCheck
-    extends AbstractCheck {
+    extends AbstractCheck implements OneCheckInstancePerThread {
     /**
      * A key is pointing to the warning message text in "messages.properties"
      * file.

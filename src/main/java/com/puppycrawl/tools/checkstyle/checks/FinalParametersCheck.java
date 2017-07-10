@@ -24,6 +24,7 @@ import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.puppycrawl.tools.checkstyle.OneCheckInstancePerApplication;
 import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
@@ -54,7 +55,7 @@ import com.puppycrawl.tools.checkstyle.utils.CommonUtils;
  * @author Michael Studman
  * @author <a href="mailto:nesterenko-aleksey@list.ru">Aleksey Nesterenko</a>
  */
-public class FinalParametersCheck extends AbstractCheck {
+public class FinalParametersCheck extends AbstractCheck implements OneCheckInstancePerApplication {
 
     /**
      * A key is pointing to the warning message text in "messages.properties"

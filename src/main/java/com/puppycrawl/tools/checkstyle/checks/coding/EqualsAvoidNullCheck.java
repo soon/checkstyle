@@ -23,6 +23,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.puppycrawl.tools.checkstyle.OneCheckInstancePerThread;
 import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
@@ -58,7 +59,8 @@ import com.puppycrawl.tools.checkstyle.api.TokenTypes;
  * @author Travis Schneeberger
  * @author Vladislav Lisetskiy
  */
-public class EqualsAvoidNullCheck extends AbstractCheck {
+public class EqualsAvoidNullCheck
+    extends AbstractCheck implements OneCheckInstancePerThread {
 
     /**
      * A key is pointing to the warning message text in "messages.properties"

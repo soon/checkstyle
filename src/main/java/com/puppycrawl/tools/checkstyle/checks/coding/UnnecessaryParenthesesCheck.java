@@ -19,6 +19,7 @@
 
 package com.puppycrawl.tools.checkstyle.checks.coding;
 
+import com.puppycrawl.tools.checkstyle.OneCheckInstancePerThread;
 import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
@@ -51,7 +52,8 @@ import com.puppycrawl.tools.checkstyle.utils.CommonUtils;
  *
  * @author Eric Roe
  */
-public class UnnecessaryParenthesesCheck extends AbstractCheck {
+public class UnnecessaryParenthesesCheck extends AbstractCheck
+        implements OneCheckInstancePerThread {
 
     /**
      * A key is pointing to the warning message text in "messages.properties"
@@ -188,6 +190,12 @@ public class UnnecessaryParenthesesCheck extends AbstractCheck {
     public int[] getRequiredTokens() {
         // Check can work with any of acceptable tokens
         return CommonUtils.EMPTY_INT_ARRAY;
+    }
+
+    @Override
+    public void beginTree(DetailAST rootAST) {
+        parentToSkip = null;
+        assignDepth = 0;
     }
 
     @Override

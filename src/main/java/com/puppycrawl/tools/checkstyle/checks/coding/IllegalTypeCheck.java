@@ -24,8 +24,10 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 
+import com.puppycrawl.tools.checkstyle.OneCheckInstancePerApplication;
 import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.FullIdent;
@@ -90,7 +92,8 @@ import com.puppycrawl.tools.checkstyle.utils.TokenUtils;
  * @author <a href="mailto:nesterenko-aleksey@list.ru">Aleksey Nesterenko</a>
  * @author <a href="mailto:andreyselkin@gmail.com">Andrei Selkin</a>
  */
-public final class IllegalTypeCheck extends AbstractCheck {
+public final class IllegalTypeCheck extends AbstractCheck
+        implements OneCheckInstancePerApplication {
 
     /**
      * A key is pointing to the warning message text in "messages.properties"
@@ -123,7 +126,7 @@ public final class IllegalTypeCheck extends AbstractCheck {
     };
 
     /** Illegal classes. */
-    private final Set<String> illegalClassNames = new HashSet<>();
+    private final Set<String> illegalClassNames = ConcurrentHashMap.newKeySet();
     /** Legal abstract classes. */
     private final Set<String> legalAbstractClassNames = new HashSet<>();
     /** Methods which should be ignored. */

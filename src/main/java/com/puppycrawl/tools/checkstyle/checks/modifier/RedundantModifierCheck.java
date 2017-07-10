@@ -22,6 +22,7 @@ package com.puppycrawl.tools.checkstyle.checks.modifier;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.puppycrawl.tools.checkstyle.OneCheckInstancePerApplication;
 import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
@@ -115,7 +116,7 @@ import com.puppycrawl.tools.checkstyle.utils.CommonUtils;
  * @author Vladislav Lisetskiy
  */
 public class RedundantModifierCheck
-    extends AbstractCheck {
+    extends AbstractCheck implements OneCheckInstancePerApplication {
 
     /**
      * A key is pointing to the warning message text in "messages.properties"

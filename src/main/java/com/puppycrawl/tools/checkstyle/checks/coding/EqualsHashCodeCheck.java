@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import antlr.collections.AST;
+import com.puppycrawl.tools.checkstyle.OneCheckInstancePerThread;
 import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.FullIdent;
@@ -52,7 +53,7 @@ import com.puppycrawl.tools.checkstyle.utils.CheckUtils;
  * @author lkuehne
  */
 public class EqualsHashCodeCheck
-        extends AbstractCheck {
+        extends AbstractCheck implements OneCheckInstancePerThread {
     // implementation note: we have to use the following members to
     // keep track of definitions in different inner classes
 

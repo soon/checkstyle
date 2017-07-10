@@ -21,6 +21,7 @@ package com.puppycrawl.tools.checkstyle.checks.naming;
 
 import java.util.regex.Pattern;
 
+import com.puppycrawl.tools.checkstyle.OneCheckInstancePerApplication;
 import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.FullIdent;
@@ -63,7 +64,7 @@ import com.puppycrawl.tools.checkstyle.api.TokenTypes;
  * @author Oliver Burn
  */
 public class PackageNameCheck
-    extends AbstractCheck {
+    extends AbstractCheck implements OneCheckInstancePerApplication {
     /**
      * A key is pointing to the warning message text in "messages.properties"
      * file.

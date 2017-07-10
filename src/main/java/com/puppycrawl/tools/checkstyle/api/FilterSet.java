@@ -20,9 +20,10 @@
 package com.puppycrawl.tools.checkstyle.api;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * A filter set applies filters to AuditEvents.
@@ -32,8 +33,10 @@ import java.util.Set;
  */
 public class FilterSet
     implements Filter {
+    // should we use concurrent hashmap?
     /** Filter set. */
-    private final Set<Filter> filters = new HashSet<>();
+    private final Set<Filter> filters = ConcurrentHashMap.newKeySet();
+    public AtomicLong totalAcceptTime = new AtomicLong();
 
     /**
      * Adds a Filter to the set.
@@ -84,12 +87,15 @@ public class FilterSet
     @Override
     public boolean accept(AuditEvent event) {
         boolean result = true;
+        long beforeAccept = System.currentTimeMillis();
         for (Filter filter : filters) {
             if (!filter.accept(event)) {
                 result = false;
                 break;
             }
         }
+        long afterAccept = System.currentTimeMillis();
+        totalAcceptTime.addAndGet(afterAccept - beforeAccept);
         return result;
     }
 

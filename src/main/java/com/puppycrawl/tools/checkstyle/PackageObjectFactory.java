@@ -765,5 +765,7 @@ public class PackageObjectFactory implements ModuleFactory {
         NAME_TO_FULL_MODULE_NAME.put("Checker", BASE_PACKAGE + ".Checker");
         NAME_TO_FULL_MODULE_NAME.put("MultiThreadChecker", BASE_PACKAGE + ".MultiThreadChecker");
         NAME_TO_FULL_MODULE_NAME.put("TreeWalker", BASE_PACKAGE + ".TreeWalker");
+        NAME_TO_FULL_MODULE_NAME.put("MultiThreadTreeWalker",
+            BASE_PACKAGE + ".MultiThreadTreeWalker");
     }
 }

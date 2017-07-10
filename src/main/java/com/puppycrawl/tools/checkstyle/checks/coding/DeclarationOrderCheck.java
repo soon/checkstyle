@@ -24,6 +24,7 @@ import java.util.Deque;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.puppycrawl.tools.checkstyle.OneCheckInstancePerThread;
 import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.Scope;
@@ -107,7 +108,7 @@ import com.puppycrawl.tools.checkstyle.utils.ScopeUtils;
  *
  * @author r_auckenthaler
  */
-public class DeclarationOrderCheck extends AbstractCheck {
+public class DeclarationOrderCheck extends AbstractCheck implements OneCheckInstancePerThread {
 
     /**
      * A key is pointing to the warning message text in "messages.properties"

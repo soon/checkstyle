@@ -22,6 +22,7 @@ package com.puppycrawl.tools.checkstyle.checks.whitespace;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.puppycrawl.tools.checkstyle.OneCheckInstancePerApplication;
 import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.FileContents;
@@ -188,7 +189,8 @@ import com.puppycrawl.tools.checkstyle.utils.JavadocUtils;
  * @author maxvetrenko
  * @author <a href="mailto:nesterenko-aleksey@list.ru">Aleksey Nesterenko</a>
  */
-public class EmptyLineSeparatorCheck extends AbstractCheck {
+public class EmptyLineSeparatorCheck extends AbstractCheck
+        implements OneCheckInstancePerApplication {
 
     /**
      * A key is pointing to the warning message empty.line.separator in "messages.properties"

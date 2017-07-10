@@ -25,8 +25,10 @@ import java.io.StringReader;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.SortedSet;
@@ -72,18 +74,18 @@ public final class TreeWalker extends AbstractFileSetCheck implements ExternalRe
     private static final int DEFAULT_TAB_WIDTH = 8;
 
     /** Maps from token name to ordinary checks. */
-    private final Multimap<String, AbstractCheck> tokenToOrdinaryChecks =
+    private Multimap<String, AbstractCheck> tokenToOrdinaryChecks =
         HashMultimap.create();
 
     /** Maps from token name to comment checks. */
-    private final Multimap<String, AbstractCheck> tokenToCommentChecks =
+    private Multimap<String, AbstractCheck> tokenToCommentChecks =
             HashMultimap.create();
 
     /** Registered ordinary checks, that don't use comment nodes. */
-    private final Set<AbstractCheck> ordinaryChecks = new HashSet<>();
+    private Set<AbstractCheck> ordinaryChecks = new HashSet<>();
 
     /** Registered comment checks. */
-    private final Set<AbstractCheck> commentChecks = new HashSet<>();
+    private Set<AbstractCheck> commentChecks = new HashSet<>();
 
     /** The ast filters. */
     private final Set<TreeWalkerFilter> filters = new HashSet<>();
@@ -527,6 +529,43 @@ public final class TreeWalker extends AbstractFileSetCheck implements ExternalRe
         resourceLocations.addAll(ordinaryChecksResources);
         resourceLocations.addAll(commentChecksResources);
         return resourceLocations;
+    }
+
+    @Override
+    public TreeWalker clone() throws CloneNotSupportedException {
+        TreeWalker clone = (TreeWalker) super.clone();
+
+        clone.commentChecks = new HashSet<>();
+        clone.ordinaryChecks = new HashSet<>();
+
+        Map<AbstractCheck, AbstractCheck> oldToCloneMap = new HashMap<>();
+        for (AbstractCheck check : commentChecks) {
+            AbstractCheck copiedCheck = oldToCloneMap.computeIfAbsent(
+                    check, CheckCloneService::cloneCheck);
+            clone.commentChecks.add(copiedCheck);
+        }
+
+        for (AbstractCheck check : ordinaryChecks) {
+            AbstractCheck copiedCheck = oldToCloneMap.computeIfAbsent(
+                    check, CheckCloneService::cloneCheck);
+            clone.ordinaryChecks.add(copiedCheck);
+        }
+
+        clone.tokenToCommentChecks = HashMultimap.create();
+        tokenToCommentChecks.forEach((name, check) -> {
+            AbstractCheck copiedCheck = oldToCloneMap.computeIfAbsent(
+                    check, CheckCloneService::cloneCheck);
+            clone.tokenToCommentChecks.put(name, copiedCheck);
+        });
+
+        clone.tokenToOrdinaryChecks = HashMultimap.create();
+        tokenToOrdinaryChecks.forEach((name, check) -> {
+            AbstractCheck copiedCheck = oldToCloneMap.computeIfAbsent(
+                    check, CheckCloneService::cloneCheck);
+            clone.tokenToOrdinaryChecks.put(name, copiedCheck);
+        });
+
+        return clone;
     }
 
     /**

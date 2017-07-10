@@ -21,6 +21,7 @@ package com.puppycrawl.tools.checkstyle.checks.whitespace;
 
 import java.util.Locale;
 
+import com.puppycrawl.tools.checkstyle.OneCheckInstancePerApplication;
 import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.utils.CommonUtils;
@@ -33,7 +34,7 @@ import com.puppycrawl.tools.checkstyle.utils.CommonUtils;
  * @author Oliver Burn
  */
 public abstract class AbstractParenPadCheck
-    extends AbstractCheck {
+    extends AbstractCheck implements OneCheckInstancePerApplication {
 
     /**
      * A key is pointing to the warning message text in "messages.properties"

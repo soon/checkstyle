@@ -22,6 +22,7 @@ package com.puppycrawl.tools.checkstyle.checks.coding;
 import java.util.Arrays;
 
 import antlr.collections.AST;
+import com.puppycrawl.tools.checkstyle.OneCheckInstancePerApplication;
 import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
@@ -41,7 +42,7 @@ import com.puppycrawl.tools.checkstyle.api.TokenTypes;
  * @author lkuehne
  */
 public class InnerAssignmentCheck
-        extends AbstractCheck {
+        extends AbstractCheck implements OneCheckInstancePerApplication {
 
     /**
      * A key is pointing to the warning message text in "messages.properties"

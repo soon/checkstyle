@@ -25,6 +25,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+import com.puppycrawl.tools.checkstyle.OneCheckInstancePerApplication;
 import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TextBlock;
@@ -97,7 +98,7 @@ import com.puppycrawl.tools.checkstyle.utils.CommonUtils;
  *
  * @author o_sukhodolsky
  */
-public class TrailingCommentCheck extends AbstractCheck {
+public class TrailingCommentCheck extends AbstractCheck implements OneCheckInstancePerApplication {
 
     /**
      * A key is pointing to the warning message text in "messages.properties"

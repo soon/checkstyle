@@ -29,6 +29,7 @@ import java.net.URLConnection;
 import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -411,17 +412,11 @@ public final class LocalizedMessage
 
     @Override
     public int compareTo(LocalizedMessage other) {
-        int result = Integer.compare(lineNo, other.lineNo);
-
-        if (lineNo == other.lineNo) {
-            if (columnNo == other.columnNo) {
-                result = getMessage().compareTo(other.getMessage());
-            }
-            else {
-                result = Integer.compare(columnNo, other.columnNo);
-            }
-        }
-        return result;
+        return Comparator.<LocalizedMessage>comparingInt(message -> message.lineNo)
+            .thenComparingInt(message -> message.columnNo)
+            .thenComparing(LocalizedMessage::getMessage)
+//            .thenComparing(LocalizedMessage::getSourceName)
+            .compare(this, other);
     }
 
     /**

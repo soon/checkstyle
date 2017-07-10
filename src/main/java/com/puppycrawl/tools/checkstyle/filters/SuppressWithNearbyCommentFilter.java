@@ -84,7 +84,7 @@ public class SuppressWithNearbyCommentFilter
     private static final String DEFAULT_INFLUENCE_FORMAT = "0";
 
     /** Tagged comments. */
-    private final List<Tag> tags = new ArrayList<>();
+    private final ThreadLocal<List<Tag>> tags = ThreadLocal.withInitial(ArrayList::new);
 
     /** Whether to look for trigger in C-style comments. */
     private boolean checkC = true;
@@ -113,7 +113,7 @@ public class SuppressWithNearbyCommentFilter
      * are reassigned to the next FileContents, at which time filtering for
      * the current FileContents is finished.
      */
-    private WeakReference<FileContents> fileContentsReference = new WeakReference<>(null);
+    private final ThreadLocal<FileContents> fileContentsReference = new ThreadLocal<>();
 
     /**
      * Set the format for a comment that turns off reporting.
@@ -136,7 +136,7 @@ public class SuppressWithNearbyCommentFilter
      * @param fileContents the FileContents for this filter.
      */
     public void setFileContents(FileContents fileContents) {
-        fileContentsReference = new WeakReference<>(fileContents);
+        fileContentsReference.set(fileContents);
     }
 
     /**
@@ -208,7 +208,7 @@ public class SuppressWithNearbyCommentFilter
      */
     private boolean matchesTag(TreeWalkerAuditEvent event) {
         boolean result = false;
-        for (final Tag tag : tags) {
+        for (final Tag tag : tags.get()) {
             if (tag.isMatch(event)) {
                 result = true;
                 break;
@@ -222,7 +222,7 @@ public class SuppressWithNearbyCommentFilter
      * sorts the list.
      */
     private void tagSuppressions() {
-        tags.clear();
+        tags.get().clear();
         final FileContents contents = getFileContents();
         if (checkCPP) {
             tagSuppressions(contents.getSingleLineComments().values());
@@ -270,7 +270,7 @@ public class SuppressWithNearbyCommentFilter
      */
     private void addTag(String text, int line) {
         final Tag tag = new Tag(text, line, this);
-        tags.add(tag);
+        tags.get().add(tag);
     }
 
     /**
