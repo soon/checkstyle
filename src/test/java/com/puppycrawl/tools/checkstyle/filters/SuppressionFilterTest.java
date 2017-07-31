@@ -66,7 +66,7 @@ public class SuppressionFilterTest extends AbstractModuleTestSupport {
         EqualsVerifier
                 .forClass(SuppressionFilter.class)
                 .usingGetClass()
-                .withIgnoredFields("file", "optional", "configuration")
+                .withIgnoredFields("file", "optional", "configuration", "context")
                 .suppress(Warning.NONFINAL_FIELDS)
                 .verify();
     }

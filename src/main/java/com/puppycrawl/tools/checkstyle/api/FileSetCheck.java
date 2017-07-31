@@ -79,4 +79,10 @@ public interface FileSetCheck
      * method, the implementation is responsible for the logging of messages.
      */
     void finishProcessing();
+
+    /**
+     * Finishes check cloning.
+     * @param originalFileSetCheck original check. Might be used to copy or move some properties.
+     */
+    void finishCloning(FileSetCheck originalFileSetCheck);
 }

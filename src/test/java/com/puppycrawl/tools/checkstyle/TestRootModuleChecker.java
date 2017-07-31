@@ -39,7 +39,16 @@ public class TestRootModuleChecker implements RootModule {
     @Override
     public void configure(Configuration configuration) throws CheckstyleException {
         config = configuration;
-        property = configuration.getAttribute("property");
+        property = config.getAttribute("property");
+    }
+
+    @Override
+    public Configuration getConfiguration() {
+        return getConfig();
+    }
+
+    public static Configuration getConfig() {
+        return config;
     }
 
     @Override
@@ -86,9 +95,5 @@ public class TestRootModuleChecker implements RootModule {
 
     public static List<File> getFilesToCheck() {
         return Collections.unmodifiableList(filesToCheck);
-    }
-
-    public static Configuration getConfig() {
-        return config;
     }
 }

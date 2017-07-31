@@ -17,29 +17,17 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 ////////////////////////////////////////////////////////////////////////////////
 
-package com.puppycrawl.tools.checkstyle.api;
+package com.puppycrawl.tools.checkstyle;
 
 /**
- * A component that can be configured.
- * Note: Configuring of object mean copy user defined properties to object.
- * Contextualizing is inheriting some properties from parent that are provided by user
- * to parent object or created by parent object.
- * The general idea of
- * Configuration/Configurable was taken from <a target="_top"
- * href="http://avalon.apache.org/closed.html">Jakarta's Avalon framework</a>.
- * @author lkuehne
+ * This interface means that the check will not be cloned during the application execution.
+ * Could be used in two cases:
+ * 1. When a check is stateless.
+ * The stateless check could be executed over several files at once (within different threads).
+ * 2. When a check is global stateful.
+ * The global stateful may accumulate information during all the application lifetime.
+ * In both cases, the check methods should be thread safe.
+ * @author Andrew Kuchev
  */
-public interface Configurable {
-    /**
-     * Configures this component.
-     * @param configuration the configuration to use.
-     * @throws CheckstyleException if there is a configuration error.
-     */
-    void configure(Configuration configuration) throws CheckstyleException;
-
-    /**
-     * Returns the configuration of the component.
-     * @return the component's configuration.
-     */
-    Configuration getConfiguration();
+public interface OneCheckInstancePerApplication {
 }

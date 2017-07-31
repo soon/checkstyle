@@ -30,7 +30,6 @@ package com.puppycrawl.tools.checkstyle.api;
  * href="http://avalon.apache.org/closed.html">Jakarta's Avalon framework</a>.
  * @author lkuehne
  */
-@FunctionalInterface
 public interface Contextualizable {
     /**
      * Sets the context for this Component.
@@ -38,4 +37,10 @@ public interface Contextualizable {
      * @throws CheckstyleException if there is a contextualization error.
      */
     void contextualize(Context context) throws CheckstyleException;
+
+    /**
+     * Returns the context of the component.
+     * @return the component's context.
+     */
+    Context getContext();
 }
