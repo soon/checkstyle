@@ -46,7 +46,7 @@
   <rule ref="rulesets/java/codesize.xml/TooManyFields">
     <properties>
       <!-- Unable to split fields out of class. -->
-      <property name="violationSuppressXPath" value="//ClassOrInterfaceDeclaration[@Image='Checker']"/>
+      <property name="violationSuppressXPath" value="//ClassOrInterfaceDeclaration[@Image='AbstractChecker']"/>
     </properties>
   </rule>
   <rule ref="rulesets/java/codesize.xml/TooManyMethods">
@@ -54,7 +54,7 @@
       <property name="maxmethods" value="20"/>
       <!-- Reducing the number of methods in RequireThisCheck requires making excess hierarchy or duplicating code, or making existing methods too complex. -->
       <!-- PackageObjectFactory has many boilerplate methods. -->
-      <property name="violationSuppressXPath" value="//ClassOrInterfaceDeclaration[@Image='RequireThisCheck' or @Image='PackageObjectFactory']"/>
+      <property name="violationSuppressXPath" value="//ClassOrInterfaceDeclaration[@Image='RequireThisCheck' or @Image='PackageObjectFactory' or @Image='TreeWalker' or @Image='AbstractChecker']"/>
     </properties>
   </rule>
   <rule ref="rulesets/java/codesize.xml/ExcessiveClassLength">
@@ -135,7 +135,7 @@
     <properties>
       <!-- TreeWalker integrates Checkstyle and antlr and CheckstyleAntTask integrates Checkstyle
        with Ant. Checker collects external resource locations and setup configuration. -->
-      <property name="violationSuppressXPath" value="//ClassOrInterfaceDeclaration[@Image='TreeWalker' or @Image='CheckstyleAntTask' or @Image='Checker' or @Image='Main']"/>
+      <property name="violationSuppressXPath" value="//ClassOrInterfaceDeclaration[@Image='TreeWalker' or @Image='CheckstyleAntTask' or @Image='AbstractChecker' or @Image='Main' or @Image='TranslationCheck']"/>
     </properties>
   </rule>
   <rule ref="rulesets/java/coupling.xml/CouplingBetweenObjects">
@@ -294,14 +294,14 @@
     <properties>
       <!-- There is no other way to deliver filename that was under processing.
            See https://github.com/checkstyle/checkstyle/issues/2285-->
-      <property name="violationSuppressXPath" value="//MethodDeclaration[@Name='processFiles' and ../../..[@Image='Checker']]"/>
+      <property name="violationSuppressXPath" value="//MethodDeclaration[@Name='processFiles' and ../../..[@Image='AbstractChecker']]"/>
     </properties>
   </rule>
   <rule ref="rulesets/java/strictexception.xml/AvoidThrowingRawExceptionTypes">
     <properties>
       <!-- There is no other way to deliver filename that was under processing.
            See https://github.com/checkstyle/checkstyle/issues/2285-->
-      <property name="violationSuppressXPath" value="//MethodDeclaration[@Name='processFiles' and ../../..[@Image='Checker']]"/>
+      <property name="violationSuppressXPath" value="//MethodDeclaration[@Name='processFiles' and ../../..[@Image='AbstractChecker']]"/>
     </properties>
   </rule>
 

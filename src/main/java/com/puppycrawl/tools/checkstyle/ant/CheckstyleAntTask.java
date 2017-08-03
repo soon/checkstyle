@@ -45,6 +45,7 @@ import org.apache.tools.ant.types.Path;
 import org.apache.tools.ant.types.Reference;
 
 import com.google.common.io.Closeables;
+import com.puppycrawl.tools.checkstyle.AbstractChecker;
 import com.puppycrawl.tools.checkstyle.Checker;
 import com.puppycrawl.tools.checkstyle.ConfigurationLoader;
 import com.puppycrawl.tools.checkstyle.DefaultLogger;
@@ -408,11 +409,11 @@ public class CheckstyleAntTask extends Task {
             rootModule = (RootModule) factory.createModule(configuration.getName());
             rootModule.setModuleClassLoader(moduleClassLoader);
 
-            if (rootModule instanceof Checker) {
+            if (rootModule instanceof AbstractChecker) {
                 final ClassLoader loader = new AntClassLoader(getProject(),
                         classpath);
 
-                ((Checker) rootModule).setClassLoader(loader);
+                ((AbstractChecker) rootModule).setClassLoader(loader);
             }
 
             rootModule.configure(configuration);

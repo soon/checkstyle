@@ -26,6 +26,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.google.common.reflect.ClassPath;
+import com.puppycrawl.tools.checkstyle.MultiThreadChecker;
 import com.puppycrawl.tools.checkstyle.TreeWalkerFilter;
 import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
 import com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck;
@@ -71,12 +72,22 @@ public final class ModuleReflectionUtils {
      */
     public static boolean isCheckstyleModule(Class<?> clazz) {
         return isValidCheckstyleClass(clazz)
+            && !isMultiThreadModule(clazz)
             && (isCheckstyleCheck(clazz)
                     || isFileSetModule(clazz)
                     || isFilterModule(clazz)
                     || isFileFilterModule(clazz)
                     || isTreeWalkerFilterModule(clazz)
                     || isRootModule(clazz));
+    }
+
+    /**
+     * Checks whether given module is multi-threaded version of another module.
+     * @param clazz class to check.
+     * @return true if a given class is a multi-threaded module.
+     */
+    public static boolean isMultiThreadModule(Class<?> clazz) {
+        return clazz == MultiThreadChecker.class;
     }
 
     /**

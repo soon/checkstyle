@@ -58,6 +58,7 @@
     <allow pkg="java.lang.reflect" local-only="true" />
     <allow pkg="java.nio" local-only="true" />
     <allow class="com.puppycrawl.tools.checkstyle.TreeWalkerFilter"/>
+    <allow class="com.puppycrawl.tools.checkstyle.MultiThreadChecker" local-only="true"/>
     <!-- allowed till https://github.com/checkstyle/checkstyle/issues/3455 -->
     <allow class="com.google.common.collect.ImmutableMap" local-only="true"/>
     <allow class="com.google.common.reflect.ClassPath" local-only="true"/>
@@ -95,6 +96,7 @@
     <allow class="com.google.common.collect.ImmutableMap" local-only="true"/>
 
     <allow class="com.puppycrawl.tools.checkstyle.Checker" local-only="true"/>
+    <allow class="com.puppycrawl.tools.checkstyle.CheckContextHolder" local-only="true"/>
     <!-- allowed till https://github.com/checkstyle/checkstyle/issues/3817 -->
     <allow pkg="com.puppycrawl.tools.checkstyle.utils"/>
   </subpackage>
@@ -104,6 +106,8 @@
     <allow pkg="com.puppycrawl.tools.checkstyle.utils"/>
     <allow class="java.nio.charset.StandardCharsets" local-only="true"/>
     <allow class="com.puppycrawl.tools.checkstyle.Definitions" local-only="true"/>
+    <allow class="com.puppycrawl.tools.checkstyle.OneCheckInstancePerThread"/>
+    <allow class="com.puppycrawl.tools.checkstyle.OneCheckInstancePerApplication"/>
 
     <!-- allowed till https://github.com/checkstyle/checkstyle/issues/3455 -->
     <allow class="com.google.common.io.Closeables" local-only="true"/>

@@ -22,7 +22,6 @@ package com.puppycrawl.tools.checkstyle;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
 
 import java.util.Set;
 
@@ -42,15 +41,8 @@ public class ThreadModeSettingsTest {
     public void testResolveCheckerInMultiThreadMode() throws Exception {
         final ThreadModeSettings configuration = new ThreadModeSettings(2, 2);
 
-        try {
-            configuration.resolveName("Checker");
-            fail("An exception is expected");
-        }
-        catch (IllegalArgumentException ex) {
-            assertEquals("Invalid exception message",
-                    "Multi thread mode for Checker module is not implemented",
-                    ex.getMessage());
-        }
+        final String moduleName = configuration.resolveName("Checker");
+        assertEquals("The invalid MT checker module", "MultiThreadChecker", moduleName);
     }
 
     @Test
